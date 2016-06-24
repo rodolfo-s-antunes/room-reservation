@@ -15,7 +15,7 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] != 1) {
 
 <?php if ($_COOKIE['login_admin']) { ?>
 
-<p><a href="#">Gerenciar usuários</a></p>
+<p><a href="list-users.php">Gerenciar usuários</a></p>
 <p><a href="#">Gerenciar salas</a></p>
 
 <?php } ?>

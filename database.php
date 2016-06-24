@@ -29,7 +29,14 @@ class DatabaseOperations
 		$query_stmt->bindParam (':username', $username);
 		$query_stmt->bindParam (':password', $password);
 		$query_stmt->execute ();
-		return $query_stmt->fetch();
+		return $query_stmt->fetch ();
+	}
+
+	function get_all_user_info ()
+	{
+		$query_stmt = $this->database_conn->prepare ("SELECT * FROM users");
+		$query_stmt->execute ();
+		return $query_stmt->fetchAll ();
 	}
 }
 
