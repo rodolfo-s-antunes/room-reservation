@@ -7,7 +7,7 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] != 1) {
 ?>
 
 <html>
-<header><title>Reservas de Salas</title></header>
+<head><title>Reservas de Salas</title></head>
 <body>
 
 <h3><?php echo "Olá, " . $_COOKIE['login_fullname']; ?></h3>
