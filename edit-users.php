@@ -67,7 +67,7 @@ else
 
 </form>
 
-<p><a href="index.php">Retornar à página inicial</a></p>
+<p><a href="edit-users.php">Retornar à listagem de usuários</a></p>
 
 </body>
 </html>

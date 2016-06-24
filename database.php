@@ -74,6 +74,46 @@ class DatabaseOperations
 		$query_stmt->bindParam (':id_user', $id_user);
 		$query_stmt->execute ();
 	}
+
+	function get_all_rooms_info ()
+	{
+		$query_stmt = $this->database_conn->prepare ("SELECT * FROM rooms");
+		$query_stmt->execute ();
+		return $query_stmt->fetchAll ();
+	}
+
+	function get_room_info ($id_room)
+	{
+		$query_stmt = $this->database_conn->prepare ("SELECT * FROM rooms WHERE id=:id_room");
+		$query_stmt->bindParam (':id_room', $id_room);
+		$query_stmt->execute ();
+		return $query_stmt->fetch ();
+	}
+
+	function add_new_room ($number, $description)
+	{
+		$query_stmt = $this->database_conn->prepare ("INSERT INTO rooms VALUES (null, :number, :description)");
+		$query_stmt->bindParam (':number', $number);
+		$query_stmt->bindParam (':description', $description);
+		$query_stmt->execute ();
+	}
+
+	function update_room ($id_room, $number, $description)
+	{
+		$query_stmt = $this->database_conn->prepare ("UPDATE rooms SET number=:number, description=:description WHERE id=:id_room");
+		$query_stmt->bindParam (':id_room', $id_room);
+		$query_stmt->bindParam (':number', $number);
+		$query_stmt->bindParam (':description', $description);
+		$query_stmt->execute ();
+	}
+
+	function remove_room ($id_room)
+	{
+		$query_stmt = $this->database_conn->prepare ("DELETE FROM rooms WHERE id=:id_room");
+		$query_stmt->bindParam (':id_room', $id_room);
+		$query_stmt->execute ();
+	}
+
 }
 
 ?>
