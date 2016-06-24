@@ -18,9 +18,9 @@ class DatabaseOperations
 			$this->database_conn->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}
 		catch (PDOException $dbexc)
-    	{
-    		echo "Falha na Conexão com o Banco de Dados: " . $dbexc->getMessage ();
-    	}
+		{
+			echo "Falha na Conexão com o Banco de Dados: " . $dbexc->getMessage ();
+		}
 	}
 
 	function authenticate_user ($username, $password)
