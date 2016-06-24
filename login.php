@@ -19,6 +19,7 @@ if (isset($_POST['login_username']) && isset($_POST['login_password']))
         $_SESSION['auth'] = 1;
         setcookie ("login_username", $user_auth_info['username'], time()+(84600*30));
         setcookie ("login_fullname", $user_auth_info['fullname'], time()+(84600*30));
+        setcookie ("login_admin", $user_auth_info['admin'], time()+(84600*30));
         header ('Location: index.php');
         exit ();
     }
