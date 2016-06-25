@@ -6,12 +6,9 @@ function LoadInterface (interface)
 	});
 }
 
-function AddNewUserInterface ()
+function LoadInterfaceCallback (result)
 {
-	$.ajax ({
-		url: "edit-users.php",
-		success: LoadInterfaceCallback
-	});	
+	$ ("#main_interface").html (result);
 }
 
 function EditUserInterface (id_user)
@@ -24,6 +21,18 @@ function EditUserInterface (id_user)
 		},
 		success: LoadInterfaceCallback
 	});
+}
+
+function EditRoomInterface (id_room)
+{
+	$.ajax ({
+		type: "POST",
+		url: "edit-rooms.php",
+		data: {
+			id_room: id_room
+		},
+		success: LoadInterfaceCallback
+	});	
 }
 
 function UpdateUserInformation ()
@@ -46,6 +55,24 @@ function UpdateUserInformation ()
 	});
 }
 
+function UpdateRoomInformation ()
+{
+	var oper = $ ("[name='submit']").attr ("value");
+	var parms = {
+		number: $ ("[name='number']").val (),
+		description: $ ("[name='description']").val (),
+		submit: oper
+	};
+	if (oper == "Atualizar")
+		parms['id_room'] = $ ("[name='id_room']").val ();
+	$.ajax ({
+		type: "POST",
+		url: "edit-rooms.php",
+		data: parms,
+		success: LoadInterfaceCallback
+	});
+}
+
 function DeleteUser ()
 {
 	$.ajax ({
@@ -59,7 +86,15 @@ function DeleteUser ()
 	});	
 }
 
-function LoadInterfaceCallback (result)
+function DeleteRoom ()
 {
-	$ ("#main_interface").html (result);
+	$.ajax ({
+		type: "POST",
+		url: "edit-rooms.php",
+		data: {
+			id_room: $ ("[name='id_room']").val (),
+			remove: "Remover"
+		},
+		success: LoadInterfaceCallback
+	});	
 }

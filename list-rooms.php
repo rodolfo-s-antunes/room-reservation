@@ -8,10 +8,6 @@ if (!isset ($_SESSION['auth']) || $_SESSION['auth'] != 1) {
 include "database.php";
 ?>
 
-<html>
-<head><title>Reservas de Salas</title></head>
-<body>
-
 <h3>Salas atualmente cadastradas no sistema:</h3>
 
 <table>
@@ -28,15 +24,11 @@ foreach ($db_ops->get_all_rooms_info () as $room_info)
 	echo "<tr>";
 	echo "<td>" . $room_info["number"] . "</td>";
 	echo "<td>" . $room_info["description"] . "</td>";
-	echo "<td><a href='edit-rooms.php?id_room=" . $room_info["id"] . "'>editar ou remover</a></td>";
+	echo "<td><a href='javascript:EditRoomInterface(" . $room_info["id"] . ")'>editar ou remover</a></td>";
 	echo "<tr>";
 }
 ?>
 
 </table>
 
-<p><a href="edit-rooms.php">Cadastrar nova sala</a></p>
-<p><a href="index.php">Retornar à página inicial</a></p>
-
-</body>
-</html>
+<p><a href="javascript:LoadInterface('edit-rooms.php')">Cadastrar nova sala</a></p>

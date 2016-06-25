@@ -34,4 +34,4 @@ foreach ($db_ops->get_all_users_info () as $user_info)
 
 </table>
 
-<p><a href="javascript:AddNewUserInterface()">Cadastrar novo usuário</a></p>
+<p><a href="javascript:LoadInterface('edit-users.php')">Cadastrar novo usuário</a></p>

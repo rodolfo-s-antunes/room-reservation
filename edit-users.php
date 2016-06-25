@@ -26,9 +26,9 @@ if (isset ($_POST["submit"]))
 
 elseif (isset ($_POST["remove"]))
 {
-		$db_ops->remove_user ($_POST["id_user"]);
-		echo "<p>Usuário Removido</p>";
-		echo "<p><a href=\"javascript:LoadInterface('list-users.php')\">Retornar</a></p>";
+	$db_ops->remove_user ($_POST["id_user"]);
+	echo "<p>Usuário Removido</p>";
+	echo "<p><a href=\"javascript:LoadInterface('list-users.php')\">Retornar</a></p>";
 }
 
 else {
@@ -50,7 +50,7 @@ else {
 <p>Senha: <input type="text" name="password" value="<?php echo (empty ($current_user_data)) ? "" : $current_user_data["password"]; ?>" /></p>
 <p>Usuário administrador? <input type="checkbox" name="admin" <?php echo (empty ($current_user_data)) ? "" : ($current_user_data["admin"]) ? "checked='checked'" : ""; ?> /></p>
 <input type="button" name="submit" onclick="UpdateUserInformation()" value="<?php echo (empty ($current_user_data)) ? "Cadastrar" : "Atualizar"; ?>" />
-<input type="button" name="submit" onclick="LoadInterface('list-users.php')" value="Cancelar" />
+<input type="button" name="cancel" onclick="LoadInterface('list-users.php')" value="Cancelar" />
 
 <?php
 	if (!empty ($current_user_data))
