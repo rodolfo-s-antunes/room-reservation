@@ -17,10 +17,10 @@ if (isset ($_POST['login_username']) && isset ($_POST['login_password']))
 	{
 		session_start ();
 		$_SESSION['auth'] = 1;
+		$_SESSION['admin'] = $user_auth_info['admin'];
 		setcookie ("login_username", $user_auth_info['username'], time()+(84600*30));
 		setcookie ("login_userid", $user_auth_info['id'], time()+(84600*30));
 		setcookie ("login_fullname", $user_auth_info['fullname'], time()+(84600*30));
-		setcookie ("login_admin", $user_auth_info['admin'], time()+(84600*30));
 		header ('Location: index.php');
 		exit ();
 	}
@@ -31,13 +31,11 @@ else {
 	<html>
 	<head><title>Reservas de Salas</title></head>
 	<body>
-	<center>
 	<form method="post" action="login.php">
 	<p>Usuário: <input type="text" name="login_username" value="<?php echo $_COOKIE['login_username']; ?>" /></p>
 	<p>Senha: <input type="password" name="login_password" /></p>
 	<input type="submit" name="submit" value="Entrar" />
 	</form>
-	</center>
 	</body>
 	</html>
 <?php
