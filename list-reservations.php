@@ -14,7 +14,7 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] != 1) {
 
 <form method="post" action="list-reservations.php">
 <p>Escolha a data para visualização: <input type="date" name="reservation_date" /></p>
-<input type="submit" name="submit" value="Entrar" />
+<input type="submit" name="submit" value="Listar Reservas" />
 </form>
 
 <?php
@@ -22,9 +22,10 @@ include "database.php";
 
 if (isset ($_POST["submit"]))
 {
+	$reservation_date = $_POST["reservation_date"];
 	$db_ops = new DatabaseOperations ();
 	$available_rooms = $db_ops->get_room_descriptions ();
-	$reservations_by_date = $db_ops->get_reservations_by_date ($_POST["reservation_date"]);
+	$reservations_by_date = $db_ops->get_reservations_by_date ($reservation_date);
 
 	echo "<table>";
 	echo "<tr><td>Sala</td>";
@@ -43,11 +44,15 @@ if (isset ($_POST["submit"]))
 			echo "<td>";
 			if (array_key_exists ($room, $reservations_by_date) && array_key_exists ($hour, $reservations_by_date[$room]))
 			{
-				$reserve_user = $reservations_by_date[$room][$hour]["fullname"];
-				echo "<a href='#' title='Reservado por $reserve_user.'>X</a>";
+				$reserved_user = $reservations_by_date[$room][$hour]["fullname"];
+				$reserved_id = $reservations_by_date[$room][$hour]["id"];
+				echo "<a href='edit-reservations.php?reservation_id=$reserved_id' title='Reservado por $reserved_user.'>X</a>";
 			}
 			else
-				echo "<a href='#'>O</a>";
+			{
+				$roomid = $available_rooms[ $room ]["id"];
+				echo "<a href='edit-reservations.php?reservation_date=$reservation_date&reservation_hour=$hour&reservation_room=$room&reservation_roomid=$roomid'>O</a>";
+			}
 			echo "</td>";
 		}
 		echo "</tr><tr>";

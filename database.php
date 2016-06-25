@@ -140,6 +140,41 @@ class DatabaseOperations
 		}
 		return $result;
 	}
+
+	function check_user_reservations ($username, $date, $hour)
+	{
+		$query_stmt = $this->database_conn->prepare ("SELECT count(reservations.id) FROM reservations JOIN users ON reservations.id_user=users.id JOIN rooms ON reservations.id_room=rooms.id WHERE users.username=:username AND reservations.date=:date AND reservations.hour=:hour");
+		$query_stmt->bindParam (':username', $username);
+		$query_stmt->bindParam (':date', $date);
+		$query_stmt->bindParam (':hour', $hour);
+		$query_stmt->execute ();
+		return $query_stmt->fetch()[0];
+	}
+
+	function add_reservation ($id_user, $id_room, $date, $hour)
+	{
+		$query_stmt = $this->database_conn->prepare ("INSERT INTO reservations VALUES (null, :id_user, :id_room, :date, :hour)");
+		$query_stmt->bindParam (':id_user', $id_user);
+		$query_stmt->bindParam (':id_room', $id_room);
+		$query_stmt->bindParam (':date', $date);
+		$query_stmt->bindParam (':hour', $hour);
+		$query_stmt->execute ();
+	}
+
+	function get_reservation ($id_reservation)
+	{
+		$query_stmt = $this->database_conn->prepare ("SELECT reservations.id, rooms.number, users.username, reservations.hour, reservations.date FROM reservations JOIN users ON reservations.id_user=users.id JOIN rooms ON reservations.id_room=rooms.id WHERE reservations.id=:id_reservation");
+		$query_stmt->bindParam (':id_reservation', $id_reservation);
+		$query_stmt->execute ();
+		return $query_stmt->fetch();
+	}
+
+	function delete_reservation ($id_reservation)
+	{
+		$query_stmt = $this->database_conn->prepare ("DELETE FROM reservations WHERE id=:id_reservation");
+		$query_stmt->bindParam (':id_reservation', $id_reservation);
+		$query_stmt->execute ();
+	}
 }
 
 ?>
