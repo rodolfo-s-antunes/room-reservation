@@ -4,27 +4,10 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] != 1) {
 	header('Location: login.php');
 	exit();
 }
-?>
 
-<html>
-<head>
-<title>Reservas de Salas</title>
-<script src="jquery.js"></script>
-<script src="reservations.js"></script>
-</head>
-<body>
-
-<h3>Visualizar reservas de salas:</h3>
-
-<form method="post" action="list-reservations.php">
-<p>Escolha a data para visualização: <input type="date" name="reservation_date" /></p>
-<input type="submit" name="submit" value="Listar Reservas" />
-</form>
-
-<?php
 include "database.php";
 
-if (isset ($_POST["submit"]))
+if (isset ($_POST["reservation_date"]))
 {
 	$reservation_date = $_POST["reservation_date"];
 	$db_ops = new DatabaseOperations ();
@@ -65,8 +48,3 @@ if (isset ($_POST["submit"]))
 }
 
 ?>
-
-<div id="reservation_management" />
-
-</body>
-</html>

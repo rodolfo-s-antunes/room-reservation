@@ -30,7 +30,6 @@ if (isset ($_POST['reservation_date']) && isset ($_POST['reservation_hour']) && 
 			echo "<h3>Reserva confirmada.</h3>";
 		}
 	}
-	echo "<p><a href='list-reservations.php'>Retornar para a visualização de reservas</a></p>";
 }
 
 elseif (isset ($_POST['reservation_id']))
@@ -57,7 +56,6 @@ elseif (isset ($_POST['reservation_id']))
 			echo "<h3>Reserva cancelada.</h3>";
 		}
 	}
-	echo "<p><a href='list-reservations.php'>Retornar para a visualização de reservas</a></p>";
 }
 
 ?>
