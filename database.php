@@ -114,6 +114,32 @@ class DatabaseOperations
 		$query_stmt->execute ();
 	}
 
+	function get_reservations_by_date ($date)
+	{
+		$query_stmt = $this->database_conn->prepare ("SELECT reservations.id, users.fullname, rooms.number, reservations.hour FROM reservations JOIN users ON reservations.id_user=users.id JOIN rooms ON reservations.id_room=rooms.id WHERE reservations.date=:reservation_date");
+		$query_stmt->bindParam (':reservation_date', $date);
+		$query_stmt->execute ();
+		$result = array();
+		foreach ($query_stmt->fetchAll () as $row)
+		{
+			if (!array_key_exists ($row['number'], $result))
+				$result[ $row['number'] ] = array();
+			$result[ $row['number'] ][ $row['hour'] ] = array( 'id'=>$row['id'], 'fullname'=>$row['fullname'] );
+		}
+		return $result;
+	}
+
+	function get_room_descriptions ()
+	{
+		$query_stmt = $this->database_conn->prepare ("SELECT * FROM rooms");
+		$query_stmt->execute ();
+		$result = array();
+		foreach ($query_stmt->fetchAll () as $row)
+		{
+			$result[ $row['number'] ] = array( "id"=>$row["id"], "description"=>$row["description"] );
+		}
+		return $result;
+	}
 }
 
 ?>
