@@ -1,4 +1,4 @@
-function RequrestReservation (room_id, room, date, hour, confirm)
+function RequrestReservation (room_id, date, hour, confirm)
 {
 	$.ajax ({
 		type: 'POST',
@@ -6,7 +6,6 @@ function RequrestReservation (room_id, room, date, hour, confirm)
 		data: {
 			reservation_date: date,
 			reservation_hour: hour,
-			reservation_room: room,
 			reservation_roomid: room_id,
 			reservation_confirm: confirm
 	 	},

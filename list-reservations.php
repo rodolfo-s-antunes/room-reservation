@@ -50,14 +50,12 @@ if (isset ($_POST["submit"]))
 			{
 				$reserved_user = $reservations_by_date[$room][$hour]["fullname"];
 				$reserved_id = $reservations_by_date[$room][$hour]["id"];
-				#echo "<a href='edit-reservations.php?reservation_id=$reserved_id' title='Reservado por $reserved_user.'>X</a>";
 				echo "<a href='javascript:CancelReservation($reserved_id,0)'>X</a>";
 			}
 			else
 			{
 				$roomid = $available_rooms[ $room ]["id"];
-				#echo "<a href='edit-reservations.php?reservation_date=$reservation_date&reservation_hour=$hour&reservation_room=$room&reservation_roomid=$roomid'>O</a>";
-				echo "<a href='javascript:RequrestReservation($roomid,$room,\"$reservation_date\",$hour,0)'>O</a>";
+				echo "<a href='javascript:RequrestReservation($roomid,\"$reservation_date\",$hour,0)'>O</a>";
 			}
 			echo "</td>";
 		}

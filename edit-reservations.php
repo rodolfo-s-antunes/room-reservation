@@ -8,27 +8,24 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] != 1) {
 include "database.php";
 $db_ops = new DatabaseOperations ();
 
-if (isset ($_POST['reservation_date']) && isset ($_POST['reservation_hour']) && isset ($_POST['reservation_room']))
+if (isset ($_POST['reservation_date']) && isset ($_POST['reservation_hour']) && isset ($_POST['reservation_roomid']))
 {
 	if ($db_ops->check_user_reservations ($_COOKIE["login_username"], $_POST['reservation_date'], $_POST['reservation_hour'])) {
 		echo "<h3>Impossível reservar: o usuário já possui outra sala reservada para o mesmo horário.</h3>";
 	}
 	else
 	{
+		$roomid = $_POST['reservation_roomid'];
+		$room = $db_ops->get_room_info ($roomid)["number"];
+		$date = $_POST['reservation_date'];
+		$hour = $_POST['reservation_hour'];
 		if (!$_POST['reservation_confirm'])
 		{
-			$room = $_POST['reservation_room'];
-			$roomid = $_POST['reservation_roomid'];
-			$date = $_POST['reservation_date'];
-			$hour = $_POST['reservation_hour'];
 			echo "<h3>Confirma reserva da sala $room para as ${hour}h do dia ${date}?</h3>";
-			echo "<a href='javascript:RequrestReservation($roomid,$room,\"$date\",$hour,1)'>Confirmar reserva</a>";
+			echo "<a href='javascript:RequrestReservation($roomid,\"$date\",$hour,1)'>Confirmar reserva</a>";
 		}
 		else
 		{
-			$roomid = $_POST['reservation_roomid'];
-			$date = $_POST['reservation_date'];
-			$hour = $_POST['reservation_hour'];
 			$db_ops->add_reservation ($_COOKIE["login_userid"], $roomid, $date, $hour);
 			echo "<h3>Reserva confirmada.</h3>";
 		}
