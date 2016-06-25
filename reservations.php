@@ -6,15 +6,9 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] != 1) {
 }
 ?>
 
-<html>
-<head>
-<title>Reservas de Salas</title>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-3.0.0.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script src="reservations.js"></script>
-</head>
-<body onload="OnBodyLoad()">
+<script>
+OnBodyLoad ();
+</script>
 
 <h3>Visualizar reservas de salas:</h3>
 
@@ -25,6 +19,3 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] != 1) {
 <div id="reservation_listing"></div>
 
 <div id="reservation_management"></div>
-
-</body>
-</html>
