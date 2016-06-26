@@ -90,7 +90,22 @@ function DeleteUser ()
 		url: "edit-users.php",
 		data: {
 			id_user: $ ("[name='id_user']").val (),
-			remove: "Remover"
+			remove: "Remover",
+			confirm: 0
+		},
+		success: UserInterfaceAlertCallback
+	});	
+}
+
+function ConfirmDeleteUser ()
+{
+	$.ajax ({
+		type: "POST",
+		url: "edit-users.php",
+		data: {
+			id_user: $ ("[name='id_user']").val (),
+			remove: "Remover",
+			confirm: 1
 		},
 		success: UserInterfaceAlertCallback
 	});	
@@ -103,7 +118,22 @@ function DeleteRoom ()
 		url: "edit-rooms.php",
 		data: {
 			id_room: $ ("[name='id_room']").val (),
-			remove: "Remover"
+			remove: "Remover",
+			confirm: 0
+		},
+		success: RoomInterfaceAlertCallback
+	});	
+}
+
+function ConfirmDeleteRoom ()
+{
+	$.ajax ({
+		type: "POST",
+		url: "edit-rooms.php",
+		data: {
+			id_room: $ ("[name='id_room']").val (),
+			remove: "Remover",
+			confirm: 1
 		},
 		success: RoomInterfaceAlertCallback
 	});	
@@ -117,7 +147,7 @@ function UserInterfaceAlertCallback (result)
 	{
 		$ ("#alerts").delay (3000).fadeOut (1000);
 	}
-	else
+	else if ($ ("#alert_message").attr ("class") == "alert_ok")
 	{
 		LoadInterface ('list-users.php');
 		$ ("#alerts").delay (2000).fadeOut (1000);
@@ -132,7 +162,7 @@ function RoomInterfaceAlertCallback (result)
 	{
 		$ ("#alerts").delay (3000).fadeOut (1000);
 	}
-	else
+	else if ($ ("#alert_message").attr ("class") == "alert_ok")
 	{
 		LoadInterface ('list-rooms.php');
 		$ ("#alerts").delay (2000).fadeOut (1000);

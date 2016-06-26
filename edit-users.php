@@ -43,8 +43,24 @@ if (isset ($_POST["submit"]))
 
 elseif (isset ($_POST["remove"]))
 {
-	$db_ops->remove_user ($_POST["id_user"]);
-	echo "<h2 class='alert_ok' id='alert_message'>Usuário Removido</h2>";
+	if ($_POST["id_user"] == 1)
+	{
+		echo "<h2 class='alert_notok' id='alert_message'>Impossível remover o Administrador!</h2>";
+	}
+	else
+	{
+		if (!$_POST["confirm"])
+		{
+			$id_user = $_POST["id_user"];
+			echo "<h2 class='alert_question' id='alert_message'>Confirma remoção do usuário?</h2>";
+			echo "<p class='alert_question'><a href='javascript:ConfirmDeleteUser($id_user)'>confirmar</a> - <a href='javascript:HideAlert()'>cancelar</a></p>";
+		}
+		else
+		{
+			$db_ops->remove_user ($_POST["id_user"]);
+			echo "<h2 class='alert_ok' id='alert_message'>Usuário Removido</h2>";
+		}
+	}
 }
 
 else {

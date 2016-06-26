@@ -22,7 +22,7 @@ body {
 	border: 1px solid #7F7F7F;
 }
 
-.alert_ok, .alert_notok {
+.alert_ok, .alert_notok, .alert_question {
 	margin: 0px;
 	padding: 5px;
 }

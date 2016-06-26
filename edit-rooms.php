@@ -39,8 +39,17 @@ if (isset ($_POST["submit"]))
 
 elseif (isset ($_POST["remove"]))
 {
-	$db_ops->remove_room ($_POST["id_room"]);
-	echo "<h2 class='alert_ok' id='alert_message'>Sala Removida</h2>";
+	if (!$_POST["confirm"])
+	{
+		$id_room = $_POST["id_room"];
+		echo "<h2 class='alert_question' id='alert_message'>Confirma remoção da sala?</h2>";
+		echo "<p class='alert_question'><a href='javascript:ConfirmDeleteRoom($id_room)'>confirmar</a> - <a href='javascript:HideAlert()'>cancelar</a></p>";
+	}
+	else
+	{
+		$db_ops->remove_room ($_POST["id_room"]);
+		echo "<h2 class='alert_ok' id='alert_message'>Sala Removida</h2>";
+	}
 }
 
 else {
