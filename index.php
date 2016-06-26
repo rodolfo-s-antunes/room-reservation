@@ -36,6 +36,7 @@ Por favor, selecione uma das opções abaixo para acessar as funcionalidades do 
 <td class='main_options'><a href="javascript:LoadInterface('list-rooms.php')">Gerenciar salas</a></td>
 <?php } ?>
 <td class='main_options'><a href="javascript:LoadInterface('reservations.php')">Gerenciar reservas</a></td>
+<td class='main_options'><a href="logout.php">Sair do sistema</a></td>
 </tr>
 </table>
 

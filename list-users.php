@@ -25,8 +25,8 @@ $db_ops = new DatabaseOperations ();
 foreach ($db_ops->get_all_users_info () as $user_info)
 {
 	echo "<tr>";
-	echo "<td class='users_rooms'>" . $user_info["username"] . "</td>";
 	echo "<td class='users_rooms'>" . $user_info["fullname"] . "</td>";
+	echo "<td class='users_rooms'>" . $user_info["username"] . "</td>";
 	$admin_print_string = ($user_info["admin"]) ? "Sim" : "Não";
 	echo "<td class='users_rooms'>" . $admin_print_string . "</td>";
 	echo "<td class='users_rooms'><a href='javascript:EditUserInterface(" . $user_info["id"] . ")'>editar ou remover</a></td>";
