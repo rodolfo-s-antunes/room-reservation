@@ -8,13 +8,15 @@ if (!isset ($_SESSION['auth']) || $_SESSION['auth'] != 1) {
 include "database.php";
 ?>
 
-<h3>Usuários atualmente cadastrados no sistema:</h3>
+<h2>Usuários atualmente cadastrados no sistema:</h2>
 
-<table>
+<table class='users_rooms'>
+
 <tr>
-	<td>Nome de usuário</td>
-	<td>Nome completo</td>
-	<td>Administrador?</td>
+	<th class='users_rooms'>Nome de usuário</td>
+	<th class='users_rooms'>Nome completo</td>
+	<th class='users_rooms'>Administrador?</td>
+	<th class='users_rooms'>Operações</td>
 </tr>
 
 <?php
@@ -23,15 +25,17 @@ $db_ops = new DatabaseOperations ();
 foreach ($db_ops->get_all_users_info () as $user_info)
 {
 	echo "<tr>";
-	echo "<td>" . $user_info["username"] . "</td>";
-	echo "<td>" . $user_info["fullname"] . "</td>";
+	echo "<td class='users_rooms'>" . $user_info["username"] . "</td>";
+	echo "<td class='users_rooms'>" . $user_info["fullname"] . "</td>";
 	$admin_print_string = ($user_info["admin"]) ? "Sim" : "Não";
-	echo "<td>" . $admin_print_string . "</td>";
-	echo "<td><a href='javascript:EditUserInterface(" . $user_info["id"] . ")'>editar ou remover</a></td>";
-	echo "<tr>";
+	echo "<td class='users_rooms'>" . $admin_print_string . "</td>";
+	echo "<td class='users_rooms'><a href='javascript:EditUserInterface(" . $user_info["id"] . ")'>editar ou remover</a></td>";
+	echo "</tr>";
 }
 ?>
 
-</table>
+<tr>
+<td class='users_rooms'><a href="javascript:LoadInterface('edit-users.php')">Cadastrar<br/>novo usuário</a></td>
+</tr>
 
-<p><a href="javascript:LoadInterface('edit-users.php')">Cadastrar novo usuário</a></p>
+</table>

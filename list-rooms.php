@@ -8,12 +8,13 @@ if (!isset ($_SESSION['auth']) || $_SESSION['auth'] != 1) {
 include "database.php";
 ?>
 
-<h3>Salas atualmente cadastradas no sistema:</h3>
+<h2>Salas atualmente cadastradas no sistema:</h2>
 
-<table>
+<table class='users_rooms'>
 <tr>
-	<td>Número da sala</td>
-	<td>Descrição</td>
+	<th class='users_rooms'>Número da sala</td>
+	<th class='users_rooms'>Descrição</td>
+	<th class='users_rooms'>Operações</td>
 </tr>
 
 <?php
@@ -22,13 +23,15 @@ $db_ops = new DatabaseOperations ();
 foreach ($db_ops->get_all_rooms_info () as $room_info)
 {
 	echo "<tr>";
-	echo "<td>" . $room_info["number"] . "</td>";
-	echo "<td>" . $room_info["description"] . "</td>";
-	echo "<td><a href='javascript:EditRoomInterface(" . $room_info["id"] . ")'>editar ou remover</a></td>";
+	echo "<td class='users_rooms'>" . $room_info["number"] . "</td>";
+	echo "<td class='users_rooms'>" . $room_info["description"] . "</td>";
+	echo "<td class='users_rooms'><a href='javascript:EditRoomInterface(" . $room_info["id"] . ")'>editar ou remover</a></td>";
 	echo "<tr>";
 }
 ?>
 
-</table>
+<tr>
+<td class='users_rooms'><a href="javascript:LoadInterface('edit-rooms.php')">Cadastrar<br/>nova sala</a></td>
+</tr>
 
-<p><a href="javascript:LoadInterface('edit-rooms.php')">Cadastrar nova sala</a></p>
+</table>

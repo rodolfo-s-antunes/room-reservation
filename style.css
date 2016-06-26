@@ -1,0 +1,81 @@
+body {
+	margin: 20px 0 20px 0;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	text-align: left;
+	vertical-align: top;
+	background: #DDDDDD;
+	color: #000000;
+}
+
+#wrapper {
+	max-width: 800px;
+	margin: 0 auto 16px auto;
+	padding: 20px 20px 20px 20px;
+	background: #FFFFFF;
+	border: 1px solid #7F7F7F;
+}
+
+p {
+	margin-top: 0px;
+	margin-bottom: 10px;
+}
+
+h1.header {
+	margin-top: 0px;
+	margin-bottom: 10px;
+	font-weight: bold;
+	font-style: normal;
+	font-size: 200%;
+}
+
+h2 {
+	margin-top: 0px;
+	margin-bottom: 10px;
+	font-weight: bold;
+	font-style: normal;
+	font-size: 120%;	
+}
+
+a:link, a:visited {
+	text-decoration: none;
+	color: #336699;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+table.main_options {
+	margin: 0px auto 20px;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+td.main_options {
+	width: 160px;
+	height: 24px;
+	padding: 0;
+}
+
+table.users_rooms {
+	margin: 0px auto 20px;
+	border: 0px;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+th.users_rooms {
+	border: 1px solid #7F7F7F;
+	padding: 2px 5px;
+	font-weight: bold;
+}
+
+td.users_rooms {
+	border: 1px solid #7F7F7F;
+	padding: 2px 4px;
+}
+
+td.form_description {
+	text-align: right;
+}
