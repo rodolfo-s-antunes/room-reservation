@@ -14,37 +14,45 @@ if (isset ($_POST["reservation_date"]))
 	$available_rooms = $db_ops->get_room_descriptions ();
 	$reservations_by_date = $db_ops->get_reservations_by_date ($reservation_date);
 
-	echo "<table>";
-	echo "<tr><td>Sala</td>";
+	echo "<table class='reservation_grid'>";
+	echo "<tr><th class='reservation_grid_room'>Sala \ Hora</td>";
 	foreach (range (6, 21) as $hour)
 	{
-		echo "<td>" . $hour . "h</td>";
+		echo "<th class='reservation_grid_hour'>" . $hour . "h</td>";
 	}
-	echo "</tr><tr>";
+	echo "</tr>";
 	$rooms = array_keys ($available_rooms);
 	sort ($rooms);
 	foreach ($rooms as $room)
 	{
-		echo "<td>$room</td>";
+		echo "<tr><th class='reservation_grid_room'>$room</td>";
 		foreach (range (6, 21) as $hour)
 		{
-			echo "<td>";
 			if (array_key_exists ($room, $reservations_by_date) && array_key_exists ($hour, $reservations_by_date[$room]))
 			{
 				$reserved_user = $reservations_by_date[$room][$hour]["fullname"];
 				$reserved_id = $reservations_by_date[$room][$hour]["id"];
-				echo "<a href='javascript:CancelReservation($reserved_id,0)'>X</a>";
+				echo "<td class='reservation_grid_busy'>";
+				echo "<a class='busy' title='Reservado por ${reserved_user}' href='javascript:CancelReservation($reserved_id,0)'>&times;</a>";
 			}
 			else
 			{
 				$roomid = $available_rooms[ $room ]["id"];
-				echo "<a href='javascript:RequrestReservation($roomid,\"$reservation_date\",$hour,0)'>O</a>";
+				echo "<td class='reservation_grid_free'>";
+				echo "<a class='free' href='javascript:RequrestReservation($roomid,\"$reservation_date\",$hour,0)'>&bull;</a>";
 			}
 			echo "</td>";
 		}
-		echo "</tr><tr>";
+		echo "</tr>";
 	}
 	echo "</table>";
+	echo "<p>";
+	echo "Um horário marcado com um &bull; e fundo verde indica um horário livre.<br/>";
+	echo "Um horário marcado com um &times; e fundo vermelho indica um horário ocupado.<br/>";
+	echo "Clique em um horário livre para efetuar uma reserva.<br/>";
+	echo "Clique em um horário ocupado para cancelar uma reserva se você a tiver efetuado.<br/>";
+	echo "Mantenha o cursor sobre um horário ocupado para ver o nome do usuário que efetuou a reserva.";
+	echo "</p>";
 }
 
 ?>

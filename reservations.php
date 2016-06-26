@@ -10,7 +10,7 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] != 1) {
 OnBodyLoad ();
 </script>
 
-<h3>Visualizar reservas de salas:</h3>
+<h2>Visualizar reservas de salas:</h2>
 
 <form method="post" action="list-reservations.php">
 <p>Selecione a data para visualização: <input type="text" id="reservation_date" onchange="ListReservations ()"/></p>

@@ -79,3 +79,59 @@ td.users_rooms {
 td.form_description {
 	text-align: right;
 }
+
+table.reservation_grid {
+	margin: 0px auto 20px;
+	border: 0px;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+th.reservation_grid_hour {
+	border: 1px solid #7F7F7F;
+	padding: 2px 4px;
+}
+
+th.reservation_grid_room {
+	border: 1px solid #7F7F7F;
+	padding: 2px 4px;
+	text-align: right;
+}
+
+td.reservation_grid_busy {
+	font-size: 200%;
+	border: 1px solid #7F7F7F;
+	background-color: #FFBFBF;
+	padding: 0px;
+	width: 33px;
+	height: 33px;
+}
+
+td.reservation_grid_free {
+	font-size: 200%;
+	border: 1px solid #7F7F7F;
+	background-color: #BFFFBF;
+	padding: 0px;
+	width: 33px;
+	height: 33px;
+}
+
+a.free:link, a.free:visited {
+	text-decoration: none;
+	color: #000000;
+}
+
+a.free:hover {
+	text-decoration: none;
+	color: #007F00;
+}
+
+a.busy:link, a.busy:visited {
+	text-decoration: none;
+	color: #000000;
+}
+
+a.busy:hover {
+	text-decoration: none;
+	color: #7F0000;
+}
