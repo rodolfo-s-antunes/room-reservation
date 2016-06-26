@@ -1,18 +1,40 @@
 <?php
+
+/*
+ * This script controls the authentication of users in the system. Differently
+ * from the remaining of the system interface, this script is NOT accessed
+ * through XHR calls, but directly. Also, if an unauthenticated user tries
+ * to access any of the system interfaces, he/she will be redirected to this
+ * script.
+ */
+
 include "database.php";
 
+/*
+ * Check if we received the login information via POST parameters. If yes,
+ then proceed to verify the authentication information.
+ */
 if (isset ($_POST['login_username']) && isset ($_POST['login_password']))
 {
 	$username = $_POST['login_username'];
 	$password = $_POST['login_password'];
 
+	// Instantiate the database class to check authentication information
 	$db_ops = new DatabaseOperations ();
+	// Verify if the informed username and (hashed) password exist in the system
+	// database. If yes, then return an array with the full user information
 	$user_auth_info = $db_ops->authenticate_user ($username, hash ('sha256', $password));
 
+	// If the inputed authentication information does not exist in the database,
+	// exit with an error.
 	if (empty ($user_auth_info))
 	{
 		echo "Falha de autenticação: nome de usuário ou senha incorretos.";
 	}
+	// If the authentication is successful, start a session for the system and set
+	// some session variables. Also, create a cookie with some (non-sensitive) user
+	// information. Finally, redirect the user to the main system interface in the
+	// index.php interface.
 	else
 	{
 		session_start ();
@@ -26,6 +48,10 @@ if (isset ($_POST['login_username']) && isset ($_POST['login_password']))
 	}
 }
 
+/*
+ * If no authentication information is received through POST parameters, then
+ * present an HTML form to allow the user to input the authentication information.
+ */
 else {
 ?>
 
