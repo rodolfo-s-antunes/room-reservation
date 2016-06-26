@@ -1,9 +1,20 @@
 <?php
+// First start the user session and verify if the user is authenticated.
+// If not, redirect to the authentication interface on "login.php".
 session_start();
 if (!isset($_SESSION['auth']) || $_SESSION['auth'] != 1) {
 	header('Location: login.php');
 	exit();
 }
+
+/*
+ * This PHP script presents the main system interface to the user. It presents
+ * a welcome message and a series of links with javascript handlers that invoke
+ * XHR methods to load the remaining interfaces in the space defined by the
+ * "main_interface" div. Additionally, it contains an "alert" div, which is
+ * used to display alerts from the remaining interfaces, also via calls to
+ * XHR methods.
+ */
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
