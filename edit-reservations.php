@@ -10,7 +10,7 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] != 1) {
 /*
  * This PHP script contains all the code related to edition of reservations.
  * That is, the operations related to the creation and removal of room
- * reservations by users. This script is always invoed thorugh XHR calls
+ * reservations by users. This script is always invoked thorugh XHR calls
  * from the "list-reservations.php" interface, and its responses are handled
  * by callbacks implemented in the "reservations.js" javascript code. All
  * data sent to this script is expected to be received through POST methods.
