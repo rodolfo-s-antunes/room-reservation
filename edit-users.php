@@ -18,7 +18,7 @@ if (isset ($_POST["submit"]))
 		}
 		else
 		{
-			$db_ops->add_new_user ($_POST["username"], $_POST["fullname"], $_POST["password"], $_POST["admin"]);
+			$db_ops->add_new_user ($_POST["username"], $_POST["fullname"], hash ('sha256', $_POST["password"]), $_POST["admin"]);
 			echo "<h2 class='alert_ok' id='alert_message'>Usuário Cadastrado</h2>";
 		}
 	}
@@ -31,7 +31,11 @@ if (isset ($_POST["submit"]))
 		}
 		else
 		{
-			$db_ops->update_user ($_POST["id_user"], $_POST["username"], $_POST["fullname"], $_POST["password"], $_POST["admin"]);
+			$db_ops->update_user_info ($_POST["id_user"], $_POST["username"], $_POST["fullname"], $_POST["admin"]);
+			if (!empty ($_POST["password"]))
+			{
+				$db_ops->update_user_password ($_POST["id_user"], hash ('sha256', $_POST["password"]));
+			}
 			echo "<h2 class='alert_ok' id='alert_message'>Usuário Atualizado</h2>";
 		}
 	}
@@ -66,7 +70,7 @@ else {
 <td><input type="text" name="fullname" size="50" value="<?php echo (empty ($current_user_data)) ? "" : $current_user_data["fullname"]; ?>" /></td>
 </tr><tr>
 <td class="form_description">Senha:</td>
-<td><input type="text" name="password" size="50" value="<?php echo (empty ($current_user_data)) ? "" : $current_user_data["password"]; ?>" /></td>
+<td><input type="text" name="password" size="50" /></td>
 </tr><tr>
 <td class="form_description">Usuário administrador?</td>
 <td><input type="checkbox" name="admin" <?php echo (empty ($current_user_data)) ? "" : ($current_user_data["admin"]) ? "checked='checked'" : ""; ?> /></td>

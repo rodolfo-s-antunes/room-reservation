@@ -7,7 +7,7 @@ if (isset ($_POST['login_username']) && isset ($_POST['login_password']))
 	$password = $_POST['login_password'];
 
 	$db_ops = new DatabaseOperations ();
-	$user_auth_info = $db_ops->authenticate_user ($username, $password);
+	$user_auth_info = $db_ops->authenticate_user ($username, hash ('sha256', $password));
 
 	if (empty ($user_auth_info))
 	{

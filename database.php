@@ -65,14 +65,21 @@ class DatabaseOperations
 		$query_stmt->execute ();
 	}
 
-	function update_user ($id_user, $username, $fullname, $password, $admin)
+	function update_user_info ($id_user, $username, $fullname, $admin)
 	{
-		$query_stmt = $this->database_conn->prepare ("UPDATE users SET username=:username, fullname=:fullname, password=:password, admin=:admin WHERE id=:id_user");
+		$query_stmt = $this->database_conn->prepare ("UPDATE users SET username=:username, fullname=:fullname, admin=:admin WHERE id=:id_user");
 		$query_stmt->bindParam (':id_user', $id_user);
 		$query_stmt->bindParam (':username', $username);
 		$query_stmt->bindParam (':fullname', $fullname);
-		$query_stmt->bindParam (':password', $password);
 		$query_stmt->bindParam (':admin', $admin);
+		$query_stmt->execute ();
+	}
+
+	function update_user_password ($id_user, $password)
+	{
+		$query_stmt = $this->database_conn->prepare ("UPDATE users SET password=:password WHERE id=:id_user");
+		$query_stmt->bindParam (':id_user', $id_user);
+		$query_stmt->bindParam (':password', $password);
 		$query_stmt->execute ();
 	}
 
