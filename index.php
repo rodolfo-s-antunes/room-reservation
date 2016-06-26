@@ -19,7 +19,7 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] != 1) {
 <script src="reservations.js"></script>
 <script src="main.js"></script>
 </head>
-<body>
+<body onload='OnMainLoad()'>
 
 <div id='wrapper'>
 
@@ -39,7 +39,9 @@ Por favor, selecione uma das opções abaixo para acessar as funcionalidades do 
 </tr>
 </table>
 
-<div id="main_interface"></div>
+<div id="alerts"></div>
+
+<div id="main_interface" ></div>
 
 </div>
 

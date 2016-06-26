@@ -13,22 +13,19 @@ if (isset ($_POST["submit"]))
 	if ($_POST["submit"] == "Cadastrar")
 	{
 		$db_ops->add_new_room ($_POST["number"], $_POST["description"]);
-		echo "<h2>Sala Cadastrada</h2>";
-		echo "<p><a href=\"javascript:LoadInterface('list-rooms.php')\">Retornar</a></p>";
+		echo "<h2 class='alert_ok' id='alert_message'>Sala Cadastrada</h2>";
 	}
 	elseif ($_POST["submit"] == "Atualizar")
 	{
 		$db_ops->update_room ($_POST["id_room"], $_POST["number"], $_POST["description"]);
-		echo "<h2>Sala Atualizada</h2>";
-		echo "<p><a href=\"javascript:LoadInterface('list-rooms.php')\">Retornar</a></p>";
+		echo "<h2 class='alert_ok' id='alert_message'>Sala Atualizada</h2>";
 	}
 }
 
 elseif (isset ($_POST["remove"]))
 {
 	$db_ops->remove_room ($_POST["id_room"]);
-	echo "<h2>Sala Removida</h2>";
-	echo "<p><a href=\"javascript:LoadInterface('list-rooms.php')\">Retornar</a></p>";
+	echo "<h2 class='alert_ok' id='alert_message'>Sala Removida</h2>";
 }
 
 else {

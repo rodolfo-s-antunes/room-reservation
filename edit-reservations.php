@@ -11,7 +11,7 @@ $db_ops = new DatabaseOperations ();
 if (isset ($_POST['reservation_date']) && isset ($_POST['reservation_hour']) && isset ($_POST['reservation_roomid']))
 {
 	if ($db_ops->check_user_reservations ($_COOKIE["login_username"], $_POST['reservation_date'], $_POST['reservation_hour'])) {
-		echo "<h3>Impossível reservar: o usuário já possui outra sala reservada para o mesmo horário.</h3>";
+		echo "<h2 class='alert_notok' id='alert_message'>Impossível reservar: o usuário já possui outra sala reservada para o mesmo horário.</h2>";
 	}
 	else
 	{
@@ -21,13 +21,13 @@ if (isset ($_POST['reservation_date']) && isset ($_POST['reservation_hour']) && 
 		$hour = $_POST['reservation_hour'];
 		if (!$_POST['reservation_confirm'])
 		{
-			echo "<h3>Confirma reserva da sala $room para as ${hour}h do dia ${date}?</h3>";
-			echo "<a href='javascript:RequrestReservation($roomid,\"$date\",$hour,1)'>Confirmar reserva</a>";
+			echo "<h2 class='alert_ok' id='alert_message'>Confirma reserva da sala $room para as ${hour}h do dia ${date}?</h2>";
+			echo "<p class='alert_ok'><a href='javascript:ConfirmReservation($roomid,\"$date\",$hour)'>confirmar</a> - <a href='javascript:HideAlert()'>cancelar</a></p>";
 		}
 		else
 		{
 			$db_ops->add_reservation ($_COOKIE["login_userid"], $roomid, $date, $hour);
-			echo "<h3>Reserva confirmada.</h3>";
+			echo "<h2 class='alert_ok' id='alert_message'>Reserva confirmada.</h2>";
 		}
 	}
 }
@@ -37,7 +37,7 @@ elseif (isset ($_POST['reservation_id']))
 	$reservation_info = $db_ops->get_reservation ($_POST['reservation_id']);
 	if ($reservation_info["username"] != $_COOKIE["login_username"])
 	{
-		echo "<h3>Impossível cancelar reserva: apenas o usuário que realizou a reserva pode fazê-lo.</h3>";
+		echo "<h2 class='alert_notok' id='alert_message'>Impossível cancelar reserva: apenas o usuário que realizou a reserva pode fazê-lo.</h2>";
 	}
 	else
 	{
@@ -47,13 +47,13 @@ elseif (isset ($_POST['reservation_id']))
 			$date = $reservation_info["date"];
 			$hour = $reservation_info["hour"];
 			$resid = $reservation_info["id"];
-			echo "<h3>Confirma cancelamento da reserva da sala $room para as ${hour}h do dia ${date}?</h3>";
-			echo "<p><a href='javascript:CancelReservation($resid,1)'>Confirmar cancelamento</a></p>";
+			echo "<h2 class='alert_ok' id='alert_message'>Confirma cancelamento da reserva da sala $room para as ${hour}h do dia ${date}?</h2>";
+			echo "<p class='alert_ok'><a href='javascript:ConfirmCancelReservation($resid)'>confirmar</a> - <a href='javascript:HideAlert()'>cancelar</a></p>";
 		}
 		else
 		{
 			$db_ops->delete_reservation ($_POST['reservation_id']);
-			echo "<h3>Reserva cancelada.</h3>";
+			echo "<h2 class='alert_ok' id='alert_message'>Reserva cancelada.</h2>";
 		}
 	}
 }

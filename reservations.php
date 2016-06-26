@@ -7,7 +7,7 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] != 1) {
 ?>
 
 <script>
-OnBodyLoad ();
+OnReservationLoad ();
 </script>
 
 <h2>Visualizar reservas de salas:</h2>

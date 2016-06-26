@@ -33,13 +33,13 @@ if (isset ($_POST["reservation_date"]))
 				$reserved_user = $reservations_by_date[$room][$hour]["fullname"];
 				$reserved_id = $reservations_by_date[$room][$hour]["id"];
 				echo "<td class='reservation_grid_busy'>";
-				echo "<a class='busy' title='Reservado por ${reserved_user}' href='javascript:CancelReservation($reserved_id,0)'>&times;</a>";
+				echo "<a class='busy' title='Reservado por ${reserved_user}' href='javascript:RequestCancelReservation($reserved_id)'>&times;</a>";
 			}
 			else
 			{
 				$roomid = $available_rooms[ $room ]["id"];
 				echo "<td class='reservation_grid_free'>";
-				echo "<a class='free' href='javascript:RequrestReservation($roomid,\"$reservation_date\",$hour,0)'>&bull;</a>";
+				echo "<a class='free' href='javascript:RequrestReservation($roomid,\"$reservation_date\",$hour)'>&bull;</a>";
 			}
 			echo "</td>";
 		}

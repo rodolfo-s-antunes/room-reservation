@@ -1,3 +1,13 @@
+function OnMainLoad ()
+{
+	$ ("#alerts").hide ();
+}
+
+function HideAlert ()
+{
+	$ ("#alerts").fadeOut (1000);
+}
+
 function LoadInterface (interface)
 {
 	$.ajax ({
@@ -51,7 +61,7 @@ function UpdateUserInformation ()
 		type: "POST",
 		url: "edit-users.php",
 		data: parms,
-		success: LoadInterfaceCallback
+		success: UserInterfaceAlertCallback
 	});
 }
 
@@ -69,7 +79,7 @@ function UpdateRoomInformation ()
 		type: "POST",
 		url: "edit-rooms.php",
 		data: parms,
-		success: LoadInterfaceCallback
+		success: RoomInterfaceAlertCallback
 	});
 }
 
@@ -82,7 +92,7 @@ function DeleteUser ()
 			id_user: $ ("[name='id_user']").val (),
 			remove: "Remover"
 		},
-		success: LoadInterfaceCallback
+		success: UserInterfaceAlertCallback
 	});	
 }
 
@@ -95,6 +105,22 @@ function DeleteRoom ()
 			id_room: $ ("[name='id_room']").val (),
 			remove: "Remover"
 		},
-		success: LoadInterfaceCallback
+		success: RoomInterfaceAlertCallback
 	});	
+}
+
+function UserInterfaceAlertCallback (result)
+{
+	$ ("#alerts").html (result);
+	$ ("#alerts").fadeIn (500);
+	LoadInterface ('list-users.php');
+	$ ("#alerts").delay (2000).fadeOut (1000);
+}
+
+function RoomInterfaceAlertCallback (result)
+{
+	$ ("#alerts").html (result);
+	$ ("#alerts").fadeIn (500);
+	LoadInterface ('list-rooms.php');
+	$ ("#alerts").delay (2000).fadeOut (1000);
 }

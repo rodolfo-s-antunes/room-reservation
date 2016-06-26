@@ -13,22 +13,19 @@ if (isset ($_POST["submit"]))
 	if ($_POST["submit"] == "Cadastrar")
 	{
 		$db_ops->add_new_user ($_POST["username"], $_POST["fullname"], $_POST["password"], $_POST["admin"]);
-		echo "<h2>Usuário Cadastrado</h2>";
-		echo "<p><a href=\"javascript:LoadInterface('list-users.php')\">Retornar</a></p>";
+		echo "<h2 class='alert_ok' id='alert_message'>Usuário Cadastrado</h2>";
 	}
 	elseif ($_POST["submit"] == "Atualizar")
 	{
 		$db_ops->update_user ($_POST["id_user"], $_POST["username"], $_POST["fullname"], $_POST["password"], $_POST["admin"]);
-		echo "<h2>Usuário Atualizado</h2>";
-		echo "<p><a href=\"javascript:LoadInterface('list-users.php')\">Retornar</a></p>";
+		echo "<h2 class='alert_ok' id='alert_message'>Usuário Atualizado</h2>";
 	}
 }
 
 elseif (isset ($_POST["remove"]))
 {
 	$db_ops->remove_user ($_POST["id_user"]);
-	echo "<h2>Usuário Removido</h2>";
-	echo "<p><a href=\"javascript:LoadInterface('list-users.php')\">Retornar</a></p>";
+	echo "<h2 class='alert_ok' id='alert_message'>Usuário Removido</h2>";
 }
 
 else {
