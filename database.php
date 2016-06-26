@@ -47,6 +47,14 @@ class DatabaseOperations
 		return $query_stmt->fetch ();
 	}
 
+	function check_user_name ($username)
+	{
+		$query_stmt = $this->database_conn->prepare ("SELECT count(id) FROM users WHERE username=:username");
+		$query_stmt->bindParam (':username', $username);
+		$query_stmt->execute ();
+		return $query_stmt->fetch ()[0];
+	}
+
 	function add_new_user ($username, $fullname, $password, $admin)
 	{
 		$query_stmt = $this->database_conn->prepare ("INSERT INTO users VALUES (null, :username, :fullname, :password, :admin)");
@@ -88,6 +96,14 @@ class DatabaseOperations
 		$query_stmt->bindParam (':id_room', $id_room);
 		$query_stmt->execute ();
 		return $query_stmt->fetch ();
+	}
+
+	function check_room_number ($number)
+	{
+		$query_stmt = $this->database_conn->prepare ("SELECT count(id) FROM rooms WHERE number=:number");
+		$query_stmt->bindParam (':number', $number);
+		$query_stmt->execute ();
+		return $query_stmt->fetch ()[0];
 	}
 
 	function add_new_room ($number, $description)

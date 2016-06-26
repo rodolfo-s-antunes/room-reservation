@@ -113,14 +113,28 @@ function UserInterfaceAlertCallback (result)
 {
 	$ ("#alerts").html (result);
 	$ ("#alerts").fadeIn (500);
-	LoadInterface ('list-users.php');
-	$ ("#alerts").delay (2000).fadeOut (1000);
+	if ($ ("#alert_message").attr ("class") == "alert_notok")
+	{
+		$ ("#alerts").delay (3000).fadeOut (1000);
+	}
+	else
+	{
+		LoadInterface ('list-users.php');
+		$ ("#alerts").delay (2000).fadeOut (1000);
+	}
 }
 
 function RoomInterfaceAlertCallback (result)
 {
 	$ ("#alerts").html (result);
 	$ ("#alerts").fadeIn (500);
-	LoadInterface ('list-rooms.php');
-	$ ("#alerts").delay (2000).fadeOut (1000);
+	if ($ ("#alert_message").attr ("class") == "alert_notok")
+	{
+		$ ("#alerts").delay (3000).fadeOut (1000);
+	}
+	else
+	{
+		LoadInterface ('list-rooms.php');
+		$ ("#alerts").delay (2000).fadeOut (1000);
+	}
 }

@@ -12,13 +12,28 @@ if (isset ($_POST["submit"]))
 {
 	if ($_POST["submit"] == "Cadastrar")
 	{
-		$db_ops->add_new_room ($_POST["number"], $_POST["description"]);
-		echo "<h2 class='alert_ok' id='alert_message'>Sala Cadastrada</h2>";
+		if ($db_ops->check_room_number ($_POST["number"]))
+		{
+			echo "<h2 class='alert_notok' id='alert_message'>Não é possível cadastrar: já existe uma sala com esse número</h2>";
+		}
+		else
+		{
+			$db_ops->add_new_room ($_POST["number"], $_POST["description"]);
+			echo "<h2 class='alert_ok' id='alert_message'>Sala Cadastrada</h2>";
+		}
 	}
 	elseif ($_POST["submit"] == "Atualizar")
 	{
-		$db_ops->update_room ($_POST["id_room"], $_POST["number"], $_POST["description"]);
-		echo "<h2 class='alert_ok' id='alert_message'>Sala Atualizada</h2>";
+		$current_room_data = $db_ops->get_room_info ($_POST['id_room']);
+		if ( ($db_ops->check_room_number ($_POST["number"])) && ($current_room_data["number"] != $_POST["number"]) )
+		{
+			echo "<h2 class='alert_notok' id='alert_message'>Não é possível atualizar: já existe uma sala com esse número</h2>";
+		}
+		else
+		{
+			$db_ops->update_room ($_POST["id_room"], $_POST["number"], $_POST["description"]);
+			echo "<h2 class='alert_ok' id='alert_message'>Sala Atualizada</h2>";
+		}
 	}
 }
 

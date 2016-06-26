@@ -12,13 +12,28 @@ if (isset ($_POST["submit"]))
 {
 	if ($_POST["submit"] == "Cadastrar")
 	{
-		$db_ops->add_new_user ($_POST["username"], $_POST["fullname"], $_POST["password"], $_POST["admin"]);
-		echo "<h2 class='alert_ok' id='alert_message'>Usuário Cadastrado</h2>";
+		if ($db_ops->check_user_name ($_POST["username"]))
+		{
+			echo "<h2 class='alert_notok' id='alert_message'>Não é possível cadastrar: nome de usuário já existe.</h2>";
+		}
+		else
+		{
+			$db_ops->add_new_user ($_POST["username"], $_POST["fullname"], $_POST["password"], $_POST["admin"]);
+			echo "<h2 class='alert_ok' id='alert_message'>Usuário Cadastrado</h2>";
+		}
 	}
 	elseif ($_POST["submit"] == "Atualizar")
 	{
-		$db_ops->update_user ($_POST["id_user"], $_POST["username"], $_POST["fullname"], $_POST["password"], $_POST["admin"]);
-		echo "<h2 class='alert_ok' id='alert_message'>Usuário Atualizado</h2>";
+		$current_user_data = $db_ops->get_user_info ($_POST['id_user']);
+		if ( ($db_ops->check_user_name ($_POST["username"])) && ($current_user_data["username"] != $_POST["username"]) )
+		{
+			echo "<h2 class='alert_notok' id='alert_message'>Não é possível atualizar: nome de usuário já existe.</h2>";
+		}
+		else
+		{
+			$db_ops->update_user ($_POST["id_user"], $_POST["username"], $_POST["fullname"], $_POST["password"], $_POST["admin"]);
+			echo "<h2 class='alert_ok' id='alert_message'>Usuário Atualizado</h2>";
+		}
 	}
 }
 

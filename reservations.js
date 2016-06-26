@@ -76,7 +76,7 @@ function ReservationRequestAlertCallback (result)
 	$ ("#alerts").html (result);
 	$ ("#alerts").fadeIn (500);
 	if ($ ("#alert_message").attr ("class") == "alert_notok")
-		$ ("#alerts").delay (3000).fadeOut (1000);	
+		$ ("#alerts").delay (3000).fadeOut (1000);
 }
 
 function ReservationConfirmAlertCallback (result)
