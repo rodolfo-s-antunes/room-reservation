@@ -1,20 +1,17 @@
 <?php
 
-# This class is responsible for all database operations required by the system.
-# TODO: Put configuration information in a separate "config.php" file.
+include "config.php";
 
 class DatabaseOperations
 {
 	function __construct ()
 	{
-		$database_server = "mysql.rsantunes.notapipe.org";
-		$database_user = "khost";
-		$database_pass = "a4b3c2d1";
-		$database_name = "rsantunes";		
 		try
 		{
-			$this->database_conn = new PDO ("mysql:host=$database_server;dbname=$database_name",
-				$database_user, $database_pass);
+			$dbs = database_server;
+			$dbn = database_name;
+			$this->database_conn = new PDO ("mysql:host=$dbs;dbname=$dbn",
+				database_user, database_pass);
 			$this->database_conn->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}
 		catch (PDOException $dbexc)
@@ -88,6 +85,9 @@ class DatabaseOperations
 		$query_stmt = $this->database_conn->prepare ("DELETE FROM users WHERE id=:id_user");
 		$query_stmt->bindParam (':id_user', $id_user);
 		$query_stmt->execute ();
+		$query_stmt = $this->database_conn->prepare ("DELETE FROM reservations WHERE id_user=:id_user");
+		$query_stmt->bindParam (':id_user', $id_user);
+		$query_stmt->execute ();
 	}
 
 	function get_all_rooms_info ()
@@ -133,6 +133,9 @@ class DatabaseOperations
 	function remove_room ($id_room)
 	{
 		$query_stmt = $this->database_conn->prepare ("DELETE FROM rooms WHERE id=:id_room");
+		$query_stmt->bindParam (':id_room', $id_room);
+		$query_stmt->execute ();
+		$query_stmt = $this->database_conn->prepare ("DELETE FROM reservations WHERE id_room=:id_room");
 		$query_stmt->bindParam (':id_room', $id_room);
 		$query_stmt->execute ();
 	}

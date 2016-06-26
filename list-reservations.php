@@ -5,6 +5,7 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] != 1) {
 	exit();
 }
 
+include "config.php";
 include "database.php";
 
 if (isset ($_POST["reservation_date"]))
@@ -16,7 +17,7 @@ if (isset ($_POST["reservation_date"]))
 
 	echo "<table class='reservation_grid'>";
 	echo "<tr><th class='reservation_grid_room'>Sala \ Hora</td>";
-	foreach (range (6, 21) as $hour)
+	foreach (range (reservation_hour_min, reservation_hour_max) as $hour)
 	{
 		echo "<th class='reservation_grid_hour'>" . $hour . "h</td>";
 	}
@@ -26,7 +27,7 @@ if (isset ($_POST["reservation_date"]))
 	foreach ($rooms as $room)
 	{
 		echo "<tr><th class='reservation_grid_room'>$room</td>";
-		foreach (range (6, 21) as $hour)
+		foreach (range (reservation_hour_min, reservation_hour_max) as $hour)
 		{
 			if (array_key_exists ($room, $reservations_by_date) && array_key_exists ($hour, $reservations_by_date[$room]))
 			{
