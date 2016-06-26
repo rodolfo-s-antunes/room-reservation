@@ -34,7 +34,7 @@ class DatabaseOperations
 
 	function get_all_users_info ()
 	{
-		$query_stmt = $this->database_conn->prepare ("SELECT * FROM users");
+		$query_stmt = $this->database_conn->prepare ("SELECT * FROM users ORDER BY fullname");
 		$query_stmt->execute ();
 		return $query_stmt->fetchAll ();
 	}
@@ -85,7 +85,7 @@ class DatabaseOperations
 
 	function get_all_rooms_info ()
 	{
-		$query_stmt = $this->database_conn->prepare ("SELECT * FROM rooms");
+		$query_stmt = $this->database_conn->prepare ("SELECT * FROM rooms ORDER BY number");
 		$query_stmt->execute ();
 		return $query_stmt->fetchAll ();
 	}
